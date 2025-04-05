@@ -4,7 +4,7 @@ import CountUp from "./components/CountUp/CountUp";
 import BlurText from "./components/BlurText/BlurText";
 import AnimatedContent from "./components/AnimatedContent/AnimatedContent";
 import Ballpit from "./components/Ballpit/Ballpit";
-import Ribbons from "./components/Ribbons/Ribbons";
+import CircularText from "./components/CircularText/CircularText";
 
 export default function Home() {
   return (
@@ -106,7 +106,13 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="col-span-6">
+          <div className="col-span-6 relative">
+            <CircularText
+              text="HAPPY*BIRTHDAY*CINDYYYY*"
+              onHover="speedUp"
+              spinDuration={20}
+              className="absolute top-20 right-8 text-black"
+            />
             <Lanyard position={[0, 0, 14]} gravity={[0, -40, 0]} />
           </div>
         </div>
