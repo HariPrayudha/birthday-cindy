@@ -5,6 +5,7 @@ import BlurText from "./components/BlurText/BlurText";
 import AnimatedContent from "./components/AnimatedContent/AnimatedContent";
 import Ballpit from "./components/Ballpit/Ballpit";
 import CircularText from "./components/CircularText/CircularText";
+import ScrollVelocity from "./components/ScrollVelocity/ScrollVelocity";
 
 export default function Home() {
   return (
@@ -116,6 +117,10 @@ export default function Home() {
             <Lanyard position={[0, 0, 14]} gravity={[0, -40, 0]} />
           </div>
         </div>
+      </div>
+
+      <div className="container mx-auto min-h-screen">
+        <ScrollVelocity texts={['Happy Birthday', 'Cindy Afriana']} className="text-[#526D96]"/>
       </div>
     </div>
   );
