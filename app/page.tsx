@@ -6,6 +6,8 @@ import AnimatedContent from "./components/AnimatedContent/AnimatedContent";
 import Ballpit from "./components/Ballpit/Ballpit";
 import CircularText from "./components/CircularText/CircularText";
 import ScrollVelocity from "./components/ScrollVelocity/ScrollVelocity";
+import RollingGallery from "./components/RollingGallery/RollingGallery";
+import Folder from "./components/Folder/Folder";
 
 export default function Home() {
   return (
@@ -96,7 +98,7 @@ export default function Home() {
 
                 <BlurText
                   text="Selamat ulang tahun, adeekkkk.
-                  Terima kasih karena sudah hadir di duniaaaa, dan lebiiiihh dari itu—karena hadir di hidupku. Kamu adalah alasan di balik banyak senyumku, dan harapan di setiap harikuuu. Aku nggak sabar melihat kamu tumbuhh, bermimpi lebih besarr, dan semoga aku bisa selalu jadi bagian dari semuaa ituuu. Aku cinta kamuuuu, hari ini… dan seterusnyaaa.
+                  Semoga sehat selaluuu, dimurahkan rezekinyaaa, berkah umurnyaaa, dannn selalu cantikk. Terima kasih karena sudah hadir di duniaaaa. Kamu adalah alasan di balik banyak senyumkuuu. Aku nggak sabar melihat kamu tumbuhh, bermimpi lebih besarr, dan semoga aku bisa selalu jadi bagian dari semuaa ituuu. Aku cinta kamuuuu, hari ini… dan seterusnyaaa.
                   "
                   delay={100}
                   animateBy="words"
@@ -119,8 +121,47 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="container mx-auto min-h-screen">
-        <ScrollVelocity texts={['Happy Birthday', 'Cindy Afriana']} className="text-[#526D96]"/>
+      <div className="container mx-auto h-screen">
+        <ScrollVelocity
+          texts={["Happy Birthday", "Cindy Afriana"]}
+          className="text-[#526D96]"
+        />
+        <div className="grid grid-cols-12">
+          <div className="col-span-6">
+            <RollingGallery autoplay={true} pauseOnHover={true} />
+          </div>
+          <div className="col-span-6">
+            <div className="flex items-center h-full">
+              <div className="flex flex-col gap-4">
+                <BlurText
+                  text="Our Last Year Moments"
+                  delay={200}
+                  animateBy="words"
+                  direction="top"
+                  className="text-5xl font-bold ml-4"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="col-span-6">
+            <div className="flex items-center h-full">
+              <div className="flex flex-col gap-4">
+                <BlurText
+                  text="Ayooww Buka Akuuuu👉🏻"
+                  delay={200}
+                  animateBy="words"
+                  direction="top"
+                  className="text-5xl font-bold ml-4"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="col-span-6">
+            <div className="flex items-center h-full">
+              <Folder size={2} color="#00d8ff" className="custom-folder" />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
