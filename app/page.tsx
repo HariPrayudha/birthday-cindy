@@ -8,13 +8,36 @@ import CircularText from "./components/CircularText/CircularText";
 import ScrollVelocity from "./components/ScrollVelocity/ScrollVelocity";
 import RollingGallery from "./components/RollingGallery/RollingGallery";
 import Folder from "./components/Folder/Folder";
+import TrueFocus from "./components/TrueFocus/TrueFocus";
+import Squares from "./components/Squares/Squares";
+import BounceCards from "./components/BounceCards/BounceCards";
+
+const images = [
+  "/images/img20.jpg",
+  "/images/img21.jpg",
+  "/images/img22.jpg",
+  "/images/img23.jpg",
+  "/images/img24.jpg",
+  "/images/img26.jpg",
+  "/images/img25.jpg",
+];
+
+const transformStyles = [
+  "rotate(5deg) translate(-150px)",
+  "rotate(0deg) translate(-70px)",
+  "rotate(-5deg)",
+  "rotate(5deg) translate(70px)",
+  "rotate(-5deg) translate(150px)",
+  "rotate(10deg) translate(220px)",
+  "rotate(-5deg) translate(240px)",
+];
 
 export default function Home() {
   return (
     <div className="min-h-screen overflow-x-hidden bg-[#EF9587]">
       <div className="absolute inset-0 w-full h-full">
         <Ballpit
-          count={100}
+          count={110}
           gravity={0.5}
           friction={0.9975}
           wallBounce={0.95}
@@ -121,45 +144,77 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="container mx-auto h-screen">
-        <ScrollVelocity
-          texts={["Happy Birthday", "Cindy Afriana"]}
-          className="text-[#526D96]"
-        />
-        <div className="grid grid-cols-12">
-          <div className="col-span-6">
+      <div className="container mx-auto min-h-screen py-16 relative z-0">
+        <div className="absolute inset-0 z-0">
+          <Squares
+            speed={0.5}
+            squareSize={60}
+            direction="diagonal"
+            borderColor="#526D96"
+            hoverFillColor="#FF69B4"
+          />
+        </div>
+        <div className="relative z-10">
+          <ScrollVelocity
+            texts={["Happy Birthday", "Cindy Afriana"]}
+            className="text-[#526D96]"
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <RollingGallery autoplay={true} pauseOnHover={true} />
+            <BlurText
+              text="Our Last Year Moments"
+              delay={200}
+              animateBy="words"
+              direction="top"
+              className="text-5xl font-bold ml-4"
+            />
           </div>
-          <div className="col-span-6">
-            <div className="flex items-center h-full">
-              <div className="flex flex-col gap-4">
-                <BlurText
-                  text="Our Last Year Moments"
-                  delay={200}
-                  animateBy="words"
-                  direction="top"
-                  className="text-5xl font-bold ml-4"
-                />
-              </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <TrueFocus
+              sentence="Ayooww Buka Akuuu👉🏻"
+              manualMode={false}
+              blurAmount={10}
+              borderColor="#526D96"
+              animationDuration={1}
+              pauseBetweenAnimations={1}
+            />
+            <div className="flex justify-center">
+              <Folder
+                size={2}
+                color="#FF69B4"
+                className="custom-folder"
+                items={[
+                  <img
+                    src="images/img18.jpg"
+                    className="w-full h-full object-cover rounded"
+                  />,
+                  <img
+                    src="images/img19.jpg"
+                    className="w-full h-full object-cover rounded"
+                  />,
+                  <img
+                    src="images/img17.jpg"
+                    className="w-full h-full object-cover rounded"
+                  />,
+                ]}
+              />
             </div>
           </div>
-          <div className="col-span-6">
-            <div className="flex items-center h-full">
-              <div className="flex flex-col gap-4">
-                <BlurText
-                  text="Ayooww Buka Akuuuu👉🏻"
-                  delay={200}
-                  animateBy="words"
-                  direction="top"
-                  className="text-5xl font-bold ml-4"
-                />
-              </div>
-            </div>
-          </div>
-          <div className="col-span-6">
-            <div className="flex items-center h-full">
-              <Folder size={2} color="#00d8ff" className="custom-folder" />
-            </div>
+
+          <div className="flex justify-center mt-20">
+            <BounceCards
+              className="custom-bounceCards"
+              images={images}
+              containerWidth={500}
+              containerHeight={250}
+              animationDelay={1}
+              animationStagger={0.08}
+              easeType="elastic.out(1, 0.5)"
+              transformStyles={transformStyles}
+              enableHover={true}
+            />
           </div>
         </div>
       </div>
