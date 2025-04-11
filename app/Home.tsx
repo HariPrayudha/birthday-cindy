@@ -73,6 +73,7 @@ export default function Home() {
                   <div className="flex item-center gap-2">
                     <h1 className="text-2xl font-bold">Happyy Birthdayyyy</h1>
                     <RotatingText
+                      key="rotating-text"
                       texts={[
                         "Cantikkuu",
                         "Cintakuu",
@@ -96,6 +97,7 @@ export default function Home() {
                         stiffness: 400,
                       }}
                       rotationInterval={2000}
+                      autoStart={true}
                     />
                   </div>
                 </AnimatedContent>
@@ -161,7 +163,11 @@ export default function Home() {
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <RollingGallery autoplay={true} pauseOnHover={true} />
+            <RollingGallery
+              autoplay={true}
+              pauseOnHover={true}
+              initialDelay={500}
+            />
             <BlurText
               text="Foto-foto bareng bidadariii"
               delay={200}

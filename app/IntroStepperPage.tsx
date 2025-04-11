@@ -2,10 +2,9 @@
 
 import { useState, useRef } from "react";
 import { Howl } from "howler";
-import dynamic from "next/dynamic";
 import Stepper, { Step } from "./components/Stepper/Stepper";
 
-const HomePage = dynamic(() => import("./Home"), { ssr: false });
+import HomePage from "./Home";
 
 const songs = [
   {
@@ -22,14 +21,16 @@ const songs = [
   },
 ];
 
-
 export default function IntroStepperPage() {
   const [currentStep, setCurrentStep] = useState(1);
   const [finalStepDone, setFinalStepDone] = useState(false);
   const [selectedSong, setSelectedSong] = useState(songs[0].url);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const soundRef = useRef<Howl | null>(null);
 
   const handleFinalStep = () => {
+    setIsTransitioning(true);
+    
     const sound = new Howl({
       src: [selectedSong],
       autoplay: true,
@@ -38,7 +39,10 @@ export default function IntroStepperPage() {
     });
     sound.play();
     soundRef.current = sound;
-    setFinalStepDone(true);
+    
+    setTimeout(() => {
+      setFinalStepDone(true);
+    }, 100);
   };
 
   return finalStepDone ? (
@@ -105,7 +109,7 @@ export default function IntroStepperPage() {
           </Step>
 
           <Step>
-            <h2 className="text-3xl font-bold text-center text-[#EEC3B4]">Let’s Goooo! 🚀</h2>
+            <h2 className="text-3xl font-bold text-center text-[#EEC3B4]">Let's Goooo! 🚀</h2>
             <p className="text-center text-[#EEC3B4]">
               Klik "Complete" dan liat websitenyaaa💝
             </p>
