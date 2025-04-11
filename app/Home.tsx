@@ -97,7 +97,6 @@ export default function Home() {
                         stiffness: 400,
                       }}
                       rotationInterval={2000}
-                      autoStart={true}
                     />
                   </div>
                 </AnimatedContent>
@@ -166,7 +165,6 @@ export default function Home() {
             <RollingGallery
               autoplay={true}
               pauseOnHover={true}
-              initialDelay={500}
             />
             <BlurText
               text="Foto-foto bareng bidadariii"
