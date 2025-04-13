@@ -13,6 +13,7 @@
     "@react-three/drei": "^9.122.0",
     "@react-three/fiber": "^8.18.0",
     "@react-three/rapier": "^1.5.0",
+    "crypto-js": "^4.2.0",
     "framer-motion": "^11.18.2",
     "gsap": "^3.12.7",
     "howler": "^2.2.4",
@@ -24,6 +25,7 @@
     "three": "^0.167.1"
   },
   "devDependencies": {
+    "@types/crypto-js": "^4.2.2",
     "@types/howler": "^2.2.12",
     "@types/node": "^20",
     "@types/react": "^18",

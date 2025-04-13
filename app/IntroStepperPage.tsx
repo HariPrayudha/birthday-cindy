@@ -1,14 +1,25 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, ChangeEvent } from "react";
 import { Howl } from "howler";
 import Stepper, { Step } from "./components/Stepper/Stepper";
-
 import HomePage from "./Home";
+import { MD5 } from "crypto-js";
 
-const songs = [
+function md5(input: string): string {
+  return MD5(input).toString();
+}
+
+interface Song {
+  label: string;
+  url: string;
+  isPasswordProtected?: boolean;
+  passwordHash?: string;
+}
+
+const songs: Song[] = [
   {
-    label: "Selamat Ulang Tahun (Acoustic Version) - Virgoun",
+    label: "Selamat Ulang Tahun - Virgoun",
     url: "/music/selamat-ulang-tahun-virgoun.mp3",
   },
   {
@@ -19,6 +30,12 @@ const songs = [
     label: "Best Part - Daniel Caesar ft. H.E.R.",
     url: "/music/best-part-daniel-caesar.mp3",
   },
+  {
+    label: "Ucapan Spesial Dari Aku 🎤",
+    url: "/music/selamat-ulang-tahun-virgoun.mp3",
+    isPasswordProtected: true,
+    passwordHash: "51755a067347c983b953b1b396f6fd32"
+  },
 ];
 
 export default function IntroStepperPage() {
@@ -26,7 +43,46 @@ export default function IntroStepperPage() {
   const [finalStepDone, setFinalStepDone] = useState(false);
   const [selectedSong, setSelectedSong] = useState(songs[0].url);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [selectedSongIndex, setSelectedSongIndex] = useState(0);
   const soundRef = useRef<Howl | null>(null);
+
+  const handleSongChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const index = e.target.selectedIndex;
+    const selectedSongObj = songs[index];
+
+    if (selectedSongObj.isPasswordProtected) {
+      setSelectedSongIndex(index);
+      setShowPasswordModal(true);
+    } else {
+      setSelectedSong(selectedSongObj.url);
+      setSelectedSongIndex(index);
+    }
+  };
+
+  const handlePasswordSubmit = () => {
+    const selectedSongObj = songs[selectedSongIndex];
+    const hashedInput = md5(password);
+    
+    if (selectedSongObj.passwordHash === hashedInput) {
+      setSelectedSong(selectedSongObj.url);
+      setShowPasswordModal(false);
+      setPasswordError("");
+      setPassword("");
+    } else {
+      setPasswordError("Password salah. Coba lagi.");
+    }
+  };
+
+  const handlePasswordCancel = () => {
+    setShowPasswordModal(false);
+    setPassword("");
+    setPasswordError("");
+    setSelectedSongIndex(0);
+    setSelectedSong(songs[0].url);
+  };
 
   const handleFinalStep = () => {
     setIsTransitioning(true);
@@ -45,10 +101,50 @@ export default function IntroStepperPage() {
     }, 100);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handlePasswordSubmit();
+    }
+  };
+
   return finalStepDone ? (
     <HomePage />
   ) : (
     <div className="min-h-screen flex items-center justify-center bg-[#EF9587]">
+      {showPasswordModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-80">
+            <h3 className="text-lg font-semibold mb-4 text-[#526D96]">Masukkan Password</h3>
+            <p className="text-sm mb-4 text-[#526D96]">
+              Lagu ini dilindungi password. Masukkan password untuk melanjutkan.
+            </p>
+            <input
+              type="password"
+              value={password}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+              onKeyDown={handleKeyDown}
+              className="w-full px-3 py-2 border border-gray-300 rounded mb-4 text-[#526D96]"
+              placeholder="Masukkan password"
+              autoFocus
+            />
+            {passwordError && <p className="text-red-500 text-sm mb-4">{passwordError}</p>}
+            <div className="flex justify-end space-x-2">
+              <button
+                onClick={handlePasswordCancel}
+                className="px-4 py-2 bg-gray-200 text-[#526D96] rounded"
+              >
+                Batal
+              </button>
+              <button
+                onClick={handlePasswordSubmit}
+                className="px-4 py-2 bg-[#EEC3B4] text-[#526D96] rounded"
+              >
+                Lanjut
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="max-w-2xl w-full px-4">
         <Stepper
           initialStep={1}
@@ -94,8 +190,8 @@ export default function IntroStepperPage() {
             </h2>
             <select
               className="w-full px-4 py-2 border border-gray-300 rounded-lg text-[#EEC3B4]"
-              value={selectedSong}
-              onChange={(e) => setSelectedSong(e.target.value)}
+              value={songs[selectedSongIndex].url}
+              onChange={handleSongChange}
             >
               {songs.map((song, index) => (
                 <option key={index} value={song.url}>
