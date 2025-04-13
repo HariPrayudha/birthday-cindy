@@ -32,7 +32,7 @@ const songs: Song[] = [
   },
   {
     label: "Ucapan Spesial Dari Aku 🎤",
-    url: "/music/selamat-ulang-tahun-virgoun.mp3",
+    url: "/music/suara-hati.mp3",
     isPasswordProtected: true,
     passwordHash: "51755a067347c983b953b1b396f6fd32"
   },

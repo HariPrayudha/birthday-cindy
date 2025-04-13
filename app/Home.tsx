@@ -28,8 +28,8 @@ const transformStyles = [
   "rotate(-5deg)",
   "rotate(5deg) translate(70px)",
   "rotate(-5deg) translate(150px)",
-  "rotate(10deg) translate(220px)",
-  "rotate(-5deg) translate(240px)",
+  "rotate(4deg) translate(220px)",
+  "rotate(10deg) translate(240px)",
 ];
 
 export default function Home() {
