@@ -25,6 +25,8 @@ import img13 from "@/app/images/img13.jpg";
 import img14 from "@/app/images/img14.jpg";
 import img15 from "@/app/images/img15.jpg";
 import img16 from "@/app/images/img16.jpg";
+import img17 from "@/app/images/img17.jpg";
+import img18 from "@/app/images/img18.jpg";
 
 const IMGS: string[] = [
   img1.src,
@@ -43,6 +45,8 @@ const IMGS: string[] = [
   img14.src,
   img15.src,
   img16.src,
+  img17.src,
+  img18.src,
 ];
 
 

@@ -19,7 +19,7 @@ interface Song {
 
 const songs: Song[] = [
   {
-    label: "Selamat Ulang Tahun - Virgoun",
+    label: "Selamat Ulang Tahun",
     url: "/music/selamat-ulang-tahun-virgoun.mp3",
   },
   {
@@ -27,11 +27,19 @@ const songs: Song[] = [
     url: "/music/selamat-ulang-tahun-jamrud.mp3",
   },
   {
-    label: "Best Part - Daniel Caesar ft. H.E.R.",
-    url: "/music/best-part-daniel-caesar.mp3",
+    label: "Blessed - Daniel Caesar",
+    url: "/music/daniel-caesar-blessed.mp3",
   },
   {
-    label: "Ucapan Spesial Dari Aku 🎤",
+    label: "You! - Lany",
+    url: "/music/lany-you.mp3",
+  },
+  {
+    label: "The Most Beautiful Thing - Bruno Major",
+    url: "/music/the-most.mp3",
+  },
+  {
+    label: "Ucapan Spesial Dari Aku 🫶🏻🤍💗",
     url: "/music/suara-hati.mp3",
     isPasswordProtected: true,
     passwordHash: "51755a067347c983b953b1b396f6fd32"
